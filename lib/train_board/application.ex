@@ -14,6 +14,8 @@ defmodule TrainBoard.Application do
       supervisor(TrainBoardWeb.Endpoint, []),
       # Start your own worker by calling: TrainBoard.Worker.start_link(arg1, arg2, arg3)
       # worker(TrainBoard.Worker, [arg1, arg2, arg3]),
+      # Run work periodically
+      worker(TrainBoard.Periodically, [])
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
