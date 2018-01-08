@@ -19,8 +19,11 @@ defmodule TrainBoard.Schedules do
       [%Train{}, ...]
 
   """
+  def list_trains(origin) do
+    Train |> where(origin: ^origin) |> order_by(:scheduled_time) |> Repo.all()
+  end
+
   def list_trains do
-    Repo.all(Train, order_by: :scheduled_time)
     Train |> order_by(:scheduled_time) |> Repo.all()
   end
 
@@ -44,7 +47,7 @@ defmodule TrainBoard.Schedules do
   end
 
   @doc """
-  convert the csv version of attrs and save
+  convert the csv version of attrs and save to db
   """
   def store_train({_, attrs}) do
     train_attrs = Map.merge(attrs, %{scheduled_time: convert_to_naive_datetime(attrs.scheduled_time) })
@@ -61,6 +64,10 @@ defmodule TrainBoard.Schedules do
     |> DateTime.to_naive
   end
 
+  @doc """
+  If there's a new file successfully downloaded then clear the trains and create them from file
+  - Otherwise log the error
+  """
   def clear_and_reset_trains do
     case fetch_new_trains_file do
       {:ok, _, file_path} -> 
@@ -73,6 +80,9 @@ defmodule TrainBoard.Schedules do
     end
   end
 
+  @doc """
+  Request and save the trains schedule csv to a Temp file
+  """
   def fetch_new_trains_file do
     case HTTPoison.get(@refresh_file_url) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
