@@ -36,6 +36,8 @@ defmodule TrainBoard.Mixfile do
       {:cowboy, "~> 1.0"},
       {:csv, "~> 2.0.0"},
       {:gettext, "~> 0.11"},
+      {:httpoison, "~> 0.13"},
+      {:temp, "~> 0.4"},
       {:phoenix, "~> 1.3.0"},
       {:phoenix_ecto, "~> 3.2"},
       {:phoenix_html, "~> 2.10"},

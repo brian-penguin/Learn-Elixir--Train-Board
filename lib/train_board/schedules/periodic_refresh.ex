@@ -14,9 +14,7 @@ defmodule TrainBoard.Periodically do
   end
 
   def handle_info(:work, state) do
-    # The Regularly occuring work
-    IO.puts "HELLO FROM GENSERVER"
-    clear_and_reset_trains
+    Schedules.clear_and_reset_trains
 
     schedule_work()
     {:noreply, state}
@@ -24,12 +22,6 @@ defmodule TrainBoard.Periodically do
 
   def schedule_work() do
     # Run every two minutes
-    Process.send_after(self(), :work, 2 * 60 *1000)
-  end
-
-  # Helper functions to call out for work
-  def clear_and_reset_trains do
-    Schedules.clear_trains
-    Schedules.create_trains
+    Process.send_after(self(), :work, 2 * 1000)
   end
 end
