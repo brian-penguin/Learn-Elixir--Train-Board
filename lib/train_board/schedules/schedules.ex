@@ -21,6 +21,7 @@ defmodule TrainBoard.Schedules do
   """
   def list_trains do
     Repo.all(Train, order_by: :scheduled_time)
+    Train |> order_by(:scheduled_time) |> Repo.all()
   end
 
   @doc """
