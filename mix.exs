@@ -38,6 +38,7 @@ defmodule TrainBoard.Mixfile do
       {:gettext, "~> 0.11"},
       {:httpoison, "~> 0.13"},
       {:temp, "~> 0.4"},
+      {:timex, "~> 3.1"},
       {:phoenix, "~> 1.3.0"},
       {:phoenix_ecto, "~> 3.2"},
       {:phoenix_html, "~> 2.10"},

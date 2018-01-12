@@ -50,18 +50,9 @@ defmodule TrainBoard.Schedules do
   convert the csv version of attrs and save to db
   """
   def store_train({_, attrs}) do
-    train_attrs = Map.merge(attrs, %{scheduled_time: convert_to_naive_datetime(attrs.scheduled_time) })
+    train_attrs = Map.merge(attrs, %{scheduled_time: TimeUtil.convert_to_naive_datetime(attrs.scheduled_time) })
     changeset = Train.changeset(%Train{}, train_attrs)
     Repo.insert!(changeset)
-  end
-
-  # We are trusting that the source will always have a valid value
-  def convert_to_naive_datetime(epoch_string) do
-    epoch_string
-    |> String.to_integer
-    |> DateTime.from_unix(:seconds)
-    |> elem(1)
-    |> DateTime.to_naive
   end
 
   @doc """
