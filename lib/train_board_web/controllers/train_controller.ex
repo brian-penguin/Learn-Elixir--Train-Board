@@ -6,11 +6,13 @@ defmodule TrainBoardWeb.TrainController do
 
   def index(conn, %{"origin" => origin}) do
     trains = Schedules.list_trains(origin)
-    render(conn, "index.html", trains: trains)
+    render(conn, "index.html", trains: trains, origin: origin)
   end
 
   def index(conn, _params) do
-    trains = Schedules.list_trains()
-    render(conn, "index.html", trains: trains)
+    # default to north station
+    origin = "North Station"
+    trains = Schedules.list_trains(origin)
+    render(conn, "index.html", trains: trains, origin: origin)
   end
 end

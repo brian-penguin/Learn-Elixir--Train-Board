@@ -1,26 +1,39 @@
-<table class="table">
-    <thead>
-        <tr>
-            <th>CARRIER</th>
-            <th>TIME</th>
-            <th>DESTINATION</th>
-            <th>TRAIN#</th>
-            <th>TRACK#</th>
-            <th>STATUS</th>
+<div class="title-container">
+    <header class="header">
+        <h1> TRAIN SCHEDULE </h1>
+    </header>
+    <h2> <%= @origin %> </h2>
+</div>
 
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <%= for train <- @trains do %>
+<div class="trains-container">
+    <div class="origin-button-container">
+        <%= link "From North Station", class: "origin-button origin-button-left", to: "/?origin=North Station" %>
+        <%= link "From South Station", class: "origin-button origin-button-right", to: "/?origin=South Station" %>
+    </div>
+
+    <table class="table">
+        <thead>
             <tr>
-                <td> MBTA </td>
-                <td><%= TimeUtil.format_schedule_time(train.scheduled_time) %></td>
-                <td><%= train.destination %></td>
-                <td><%= train.trip %></td>
-                <td><%= train.track || "TBD" %></td>
-                <td><%= train.status %></td>
+                <th>CARRIER</th>
+                <th>TIME</th>
+                <th>DESTINATION</th>
+                <th>TRAIN#</th>
+                <th>TRACK#</th>
+                <th>STATUS</th>
             </tr>
-        <% end %>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            <%= for train <- @trains do %>
+                <tr>
+                    <td> MBTA </td>
+                    <td><%= TimeUtil.format_schedule_time(train.scheduled_time) %></td>
+                    <td><%= train.destination %></td>
+                    <td><%= train.trip %></td>
+                    <td><%= train.track || "TBD" %></td>
+                    <td><%= train.status %></td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
+
