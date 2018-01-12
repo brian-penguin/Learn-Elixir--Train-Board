@@ -1,12 +1,11 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Destination</th>
-            <th>Lateness</th>
-            <th>Origin</th>
+            <th> Carrier </th>
             <th>Scheduled time</th>
-            <th>Status</th>
+            <th>Destination</th>
             <th>Track</th>
+            <th>Status</th>
             <th>Trip</th>
 
             <th></th>
@@ -15,12 +14,11 @@
     <tbody>
         <%= for train <- @trains do %>
             <tr>
-                <td><%= train.destination %></td>
-                <td><%= train.lateness %></td>
-                <td><%= train.origin %></td>
+                <td> MBTA </td>
                 <td><%= train.scheduled_time %></td>
+                <td><%= train.destination %></td>
+                <td><%= train.track || "TBD" %></td>
                 <td><%= train.status %></td>
-                <td><%= train.track %></td>
                 <td><%= train.trip %></td>
             </tr>
         <% end %>
